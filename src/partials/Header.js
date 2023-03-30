@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled, {css} from 'styled-components';
 import logo from '../assets/derun.jpg';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { AppContext } from '../providers/AppProvider';
 
 
@@ -65,7 +66,13 @@ const StyledHeader = styled.div `
 
 export const Header = () => {
   const {state,dispatch} =useContext(AppContext);
-  return (
+  const [user, setUser] = useLocalStorage('user');
+
+  const handleLogin = useCallback(()=> {
+    setUser('seyma');
+  }, [setUser])
+
+    return (
    <StyledHeader>
     <div className='logo-container'  >
       <img src={logo} alt="logo" />
@@ -73,7 +80,7 @@ export const Header = () => {
     <nav className='menu-conatiner' >
       <ul>
         <Link to="/">Anasayfa</Link>
-        <Link to="idariHakedis">İdari Hakediş</Link>
+        <Link to="/idariHakedis">İdari Hakediş</Link>
         <Link to="/setBakim">Set Bakım İşlemleri</Link>
         <Link to="/setimNerede">Setim Nerede?</Link>
         <Link to="/private">Yetki Sınırı Alanı</Link>

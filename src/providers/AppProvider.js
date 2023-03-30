@@ -10,10 +10,10 @@ export const AppContext = createContext();
 
 function reducerFn(state ,action){
     switch(action.type){
-        case 'login':{
+        case "login":{
             return { user: action.payload, loggedIn: true};
         }
-        case 'logout':{
+        case "logout":{
             return initialState;
         }
         default :{
